@@ -18,7 +18,7 @@ public class Employee {
     @Column(nullable = false)
     private String lastName;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = true)
     @JoinColumn(name = "project_id")
     private Project project;
 
@@ -29,17 +29,22 @@ public class Employee {
     @Column(nullable = false)
     private EmployeeStatus status;
 
+
+    @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
+
+    @Column
     private LocalDateTime updatedAt;
+
 
     public Employee() {}
 
-    public Employee(Integer id, String firstName, String lastName, Project project, String email) {
+    public Employee(Integer id, String firstName, String lastName, String email, Project project) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.project = project;
         this.email = email;
+        this.project = project;
     }
 
     public Integer getId() {
@@ -103,8 +108,7 @@ public class Employee {
 
     @Override
     public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        Employee employee = (Employee) o;
+        if (!(o instanceof Employee employee)) return false;
         return Objects.equals(id, employee.id) && Objects.equals(firstName, employee.firstName) && Objects.equals(lastName, employee.lastName) && Objects.equals(project, employee.project) && Objects.equals(email, employee.email) && status == employee.status && Objects.equals(createdAt, employee.createdAt) && Objects.equals(updatedAt, employee.updatedAt);
     }
 

@@ -9,7 +9,6 @@ public class EmployeeResponse {
     private String email;
     private EmployeeStatus status;
     private Integer projectId;
-    private String projectName;
 
     public EmployeeResponse(
             Integer id,
@@ -17,8 +16,7 @@ public class EmployeeResponse {
             String lastName,
             String email,
             EmployeeStatus status,
-            Integer projectId,
-            String projectName
+            Integer projectId
     ) {
         this.id = id;
         this.firstName = firstName;
@@ -26,7 +24,6 @@ public class EmployeeResponse {
         this.email = email;
         this.status = status;
         this.projectId = projectId;
-        this.projectName = projectName;
     }
 
     public Integer getId() {
@@ -43,11 +40,5 @@ public class EmployeeResponse {
 
     public EmployeeStatus getStatus() { return status; }
 
-    public Integer getProjectId() {
-        return projectId;
-    }
-
-    public String getProjectName() {
-        return projectName;
-    }
+    public Integer getProjectId() { return projectId; }
 }
