@@ -77,10 +77,14 @@ public class EmployeeService {
             employee.setStatus(request.getStatus());
         }
 
-        if (request.getProjectId() != null) {
-            Project project = projectRepository.findById(request.getProjectId())
-                    .orElseThrow(() -> new ResourceNotFoundException("Project", request.getProjectId()));
-            employee.setProject(project);
+        if (request.wasProjectIdProvided()) {
+            if (request.getProjectId() == null) {
+                employee.setProject(null);
+            } else {
+                Project project = projectRepository.findById(request.getProjectId())
+                        .orElseThrow(() -> new ResourceNotFoundException("Project", request.getProjectId()));
+                employee.setProject(project);
+            }
         }
 
         Employee updated = employeeRepository.save(employee);
